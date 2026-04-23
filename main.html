@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Practice</title>
+  <style>
+    :root {
+      --bg: #f6efe7;
+      --surface: rgba(255, 250, 245, 0.82);
+      --text: #1f1b18;
+      --muted: #6f665d;
+      --primary: #da5a2a;
+      --secondary: #184c45;
+      --line: rgba(31, 27, 24, 0.08);
+      --shadow: 0 24px 60px rgba(89, 46, 24, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 197, 138, 0.9), transparent 36%),
+        radial-gradient(circle at 85% 20%, rgba(54, 117, 104, 0.28), transparent 28%),
+        linear-gradient(135deg, var(--bg), #fffaf4 50%, #f4e6d6);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 260px;
+      height: 260px;
+      background: rgba(218, 90, 42, 0.14);
+      top: -80px;
+      right: -60px;
+    }
+
+    body::after {
+      width: 200px;
+      height: 200px;
+      background: rgba(24, 76, 69, 0.12);
+      bottom: 20px;
+      left: -50px;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.42);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), #ff9d58);
+      box-shadow: 0 16px 30px rgba(218, 90, 42, 0.26);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav span {
+      cursor: default;
+    }
+
+    .auth {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-status {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--secondary);
+      background: rgba(24, 76, 69, 0.08);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .card {
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      overflow: hidden;
+    }
+
+    .hero-main {
+      padding: 52px;
+      background:
+        linear-gradient(145deg, rgba(255, 248, 240, 0.95), rgba(255, 239, 219, 0.92)),
+        #fff;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(24, 76, 69, 0.08);
+      color: var(--secondary);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 22px 0 16px;
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-main p {
+      max-width: 560px;
+      margin: 0 0 28px;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 132px;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), #ff8f4b);
+      box-shadow: 0 18px 32px rgba(218, 90, 42, 0.28);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .button-dark {
+      color: #f7f3ed;
+      background: linear-gradient(135deg, var(--secondary), #25675d);
+      box-shadow: 0 14px 26px rgba(24, 76, 69, 0.2);
+    }
+
+    .button-light {
+      color: var(--secondary);
+      background: rgba(24, 76, 69, 0.1);
+      border: 1px solid rgba(24, 76, 69, 0.14);
+    }
+
+    .login-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .login-copy strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .login-copy span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .login-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.4rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-side {
+      position: relative;
+      min-height: 100%;
+      background:
+        linear-gradient(180deg, rgba(24, 76, 69, 0.92), rgba(10, 37, 33, 0.95)),
+        #123;
+      color: #f6f1e9;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-side::before {
+      content: "";
+      position: absolute;
+      inset: auto -70px -70px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 36px;
+      background: linear-gradient(135deg, rgba(255, 182, 122, 0.28), rgba(255, 182, 122, 0));
+      transform: rotate(24deg);
+    }
+
+    .panel-tag,
+    .mini-tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .panel-tag {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-side h2 {
+      margin: 16px 0 10px;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .hero-side p,
+    .note p {
+      color: rgba(246, 241, 233, 0.78);
+      line-height: 1.7;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+    }
+
+    .card-inner {
+      padding: 28px;
+    }
+
+    .mini-tag {
+      color: var(--primary);
+      background: rgba(218, 90, 42, 0.1);
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .list li {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .list strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .gallery-item {
+      min-height: 96px;
+      border-radius: 22px;
+      padding: 18px;
+      color: #fff;
+      font-weight: 700;
+      display: flex;
+      align-items: flex-end;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .gallery-item.one {
+      background-image: linear-gradient(135deg, rgba(218, 90, 42, 0.92), rgba(255, 162, 96, 0.5));
+    }
+
+    .gallery-item.two {
+      background-image: linear-gradient(135deg, rgba(24, 76, 69, 0.92), rgba(72, 138, 125, 0.48));
+    }
+
+    .gallery-item.three {
+      background-image: linear-gradient(135deg, rgba(37, 42, 92, 0.92), rgba(111, 124, 227, 0.48));
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-main,
+    .hero-side,
+    .card {
+      animation: floatUp 0.7s ease both;
+    }
+
+    .hero-side {
+      animation-delay: 0.12s;
+    }
+
+    .content-grid .card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .content-grid .card:nth-child(3) {
+      animation-delay: 0.28s;
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main {
+        padding: 34px 28px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .topbar-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .login-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 18px, 1120px);
+        padding-top: 16px;
+      }
+
+      .topbar {
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .topbar-right {
+        gap: 12px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-side,
+      .card-inner {
+        padding: 22px;
+      }
+
+      .auth,
+      .login-actions {
+        width: 100%;
+      }
+
+      .auth .button,
+      .login-actions .button {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <span>Creative Lab</span>
+      </div>
+
+      <div class="topbar-right">
+        <nav class="nav">
+          <span>Home</span>
+          <span>Projects</span>
+          <span>About</span>
+          <span>Contact</span>
+        </nav>
+
+        <div class="auth">
+          <span class="auth-status" id="authStatus">현재 상태: 로그아웃</span>
+          <button class="button button-light" id="topLoginButton" type="button">로그인</button>
+          <button class="button button-dark hidden" id="topLogoutButton" type="button">로그아웃</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <article class="hero-main">
+          <div class="eyebrow">Design Practice Playground</div>
+          <h1>평범한 연습 파일도<br>꽤 근사하게.</h1>
+          <p>
+            단순한 HTML 연습용 페이지를 따뜻한 색감과 선명한 대비, 카드형 레이아웃으로 재구성했습니다.
+            한 파일만 열어도 바로 결과가 보이도록 CSS와 간단한 인터랙션을 함께 넣었습니다.
+          </p>
+
+          <div class="login-panel">
+            <div class="login-copy">
+              <strong>로그인 영역도 같이 연습할 수 있습니다.</strong>
+              <span>버튼을 누르면 상단 상태와 버튼 구성이 바로 바뀝니다.</span>
+            </div>
+            <div class="login-actions">
+              <button class="button button-primary" id="heroLoginButton" type="button">로그인</button>
+              <button class="button button-secondary hidden" id="heroLogoutButton" type="button">로그아웃</button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="button button-primary" href="#">Start Exploring</a>
+            <a class="button button-secondary" href="#">See Details</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>01</strong>
+              <span>깔끔한 반응형 레이아웃</span>
+            </div>
+            <div class="stat">
+              <strong>02</strong>
+              <span>한눈에 보이는 강조 영역</span>
+            </div>
+            <div class="stat">
+              <strong>03</strong>
+              <span>연습용으로 바꾸기 쉬운 구조</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hero-side">
+          <div>
+            <span class="panel-tag">Fresh Layout</span>
+            <h2>보기 좋은 구성이 연습도 더 재밌게 만듭니다.</h2>
+            <p>
+              제목, 설명, 버튼, 카드, 포인트 색상을 한 화면에 균형 있게 배치했습니다.
+              포트폴리오 느낌으로 확장하기도 쉬운 구성입니다.
+            </p>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <span class="panel-tag">Focus</span>
+              <strong>Warm + Clean</strong>
+              <p>부드러운 배경 위에 또렷한 포인트 컬러를 올려서 시선이 잘 모이게 했습니다.</p>
+            </div>
+            <div class="mini-card">
+              <span class="panel-tag">Flow</span>
+              <strong>Simple Structure</strong>
+              <p>섹션 구성이 단순해서 텍스트나 이미지로 금방 다른 주제로 바꿀 수 있습니다.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="content-grid">
+        <article class="card">
+          <div class="card-inner">
+            <span class="mini-tag">Highlights</span>
+            <h3>이 페이지에서 연습할 수 있는 것</h3>
+            <p>레이아웃, 카드 UI, 버튼 스타일, 타이포 크기 조절, 배경 그라데이션을 한 번에 만져볼 수 있습니다.</p>
+            <ul class="list">
+              <li>
+                <strong>HTML 구조 연습</strong>
+                header, section, article, aside 같은 시맨틱 태그 사용
+              </li>
+              <li>
+                <strong>CSS 감각 익히기</strong>
+                색 조합, 그림자, radius, spacing 조절
+              </li>
+              <li>
+                <strong>반응형 확인</strong>
+                창 크기를 줄였을 때 레이아웃이 어떻게 바뀌는지 테스트
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <span class="mini-tag">Mood Board</span>
+            <h3>시각적인 포인트</h3>
+            <p>너무 복잡하지 않으면서도 심심하지 않게, 배경과 카드에 분위기를 넣었습니다.</p>
+            <div class="gallery">
+              <div class="gallery-item one">Sunset Accent</div>
+              <div class="gallery-item two">Forest Contrast</div>
+              <div class="gallery-item three">Deep Focus</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card note">
+          <div class="card-inner">
+            <span class="mini-tag">Next Step</span>
+            <h3>다음 연습 아이디어</h3>
+            <p>원하면 여기에 이미지, 자기소개, 프로젝트 카드, 로그인 폼, 메뉴 애니메이션 같은 요소를 더 붙일 수 있습니다.</p>
+            <ul class="list">
+              <li>
+                <strong>프로필 페이지로 바꾸기</strong>
+                이름, 소개, 기술 스택, 링크 버튼 추가
+              </li>
+              <li>
+                <strong>쇼핑몰 메인처럼 바꾸기</strong>
+                상품 카드와 배너 섹션 추가
+              </li>
+              <li>
+                <strong>포트폴리오 느낌으로 확장</strong>
+                프로젝트 썸네일과 상세 설명 배치
+              </li>
+            </ul>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <p class="footer-note">HTML/CSS 연습용으로 바로 수정하면서 쓰기 좋은 단일 페이지 구성</p>
+  </div>
+
+  <script>
+    const authStatus = document.getElementById("authStatus");
+    const topLoginButton = document.getElementById("topLoginButton");
+    const topLogoutButton = document.getElementById("topLogoutButton");
+    const heroLoginButton = document.getElementById("heroLoginButton");
+    const heroLogoutButton = document.getElementById("heroLogoutButton");
+
+    function setLoggedIn(isLoggedIn) {
+      authStatus.textContent = isLoggedIn ? "현재 상태: 로그인" : "현재 상태: 로그아웃";
+      topLoginButton.classList.toggle("hidden", isLoggedIn);
+      heroLoginButton.classList.toggle("hidden", isLoggedIn);
+      topLogoutButton.classList.toggle("hidden", !isLoggedIn);
+      heroLogoutButton.classList.toggle("hidden", !isLoggedIn);
+    }
+
+    topLoginButton.addEventListener("click", () => setLoggedIn(true));
+    heroLoginButton.addEventListener("click", () => setLoggedIn(true));
+    topLogoutButton.addEventListener("click", () => setLoggedIn(false));
+    heroLogoutButton.addEventListener("click", () => setLoggedIn(false));
+  </script>
+</body>
+</html>
