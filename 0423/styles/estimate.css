@@ -1,0 +1,493 @@
+/* ─── 견적서 페이지 레이아웃 ──────────────────────────────────────────────── */
+
+.estimate-content {
+  padding: 20px 24px 32px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.estimate-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ─── 공통 패널 ─────────────────────────────────────────────────────────── */
+
+.estimate-form-panel,
+.estimate-table-panel,
+.estimate-preview-panel {
+  background: #ffffff;
+  border: 1px solid #eceef3;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(32, 43, 67, 0.07);
+  overflow: hidden;
+}
+
+.estimate-panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2e3544;
+}
+
+/* ─── 현재 입력 정보 패널 ───────────────────────────────────────────────── */
+
+.estimate-info-panel {
+  background: #f8f9fc;
+  border: 1px solid #e6e9f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.estimate-info-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #5b4bf3;
+  margin-bottom: 10px;
+}
+
+.estimate-info-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.estimate-info-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.estimate-info-row dt {
+  color: #8a95a8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.estimate-info-row dd {
+  color: #2e3544;
+  font-weight: 600;
+}
+
+/* ─── 좌측 폼 패널 ──────────────────────────────────────────────────────── */
+
+.estimate-form-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.estimate-form-body {
+  padding: 16px;
+  border-bottom: 1px solid #eef1f5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.estimate-item-form-section {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fafbfc;
+}
+
+.estimate-item-form-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #5b4bf3;
+  margin-bottom: 2px;
+}
+
+.estimate-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.estimate-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7b8799;
+}
+
+.estimate-input {
+  height: 36px;
+  border: 1px solid #dde2ea;
+  border-radius: 6px;
+  padding: 0 10px;
+  background: #ffffff;
+  font-size: 13px;
+  color: #2c3442;
+  width: 100%;
+}
+
+.estimate-input:focus {
+  outline: none;
+  border-color: #5b4bf3;
+  box-shadow: 0 0 0 3px rgba(91, 75, 243, 0.1);
+}
+
+.estimate-textarea {
+  border: 1px solid #dde2ea;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #ffffff;
+  font-size: 13px;
+  color: #2c3442;
+  width: 100%;
+  min-height: 72px;
+  resize: vertical;
+}
+
+.estimate-textarea:focus {
+  outline: none;
+  border-color: #5b4bf3;
+  box-shadow: 0 0 0 3px rgba(91, 75, 243, 0.1);
+}
+
+.estimate-add-btn {
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background: #5b4bf3;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.estimate-add-btn:hover {
+  background: #4a3de0;
+}
+
+.estimate-add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── 중앙 테이블 패널 ─────────────────────────────────────────────────── */
+
+.estimate-table-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.estimate-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.estimate-item-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5b4bf3;
+  background: rgba(91, 75, 243, 0.08);
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.estimate-table-wrap {
+  overflow-x: auto;
+}
+
+.estimate-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.estimate-table thead th {
+  background: #f3f6fa;
+  color: #7b8799;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e9edf3;
+  white-space: nowrap;
+}
+
+.estimate-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef1f5;
+  color: #495468;
+}
+
+.estimate-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.estimate-table-empty {
+  text-align: center;
+  color: #aab0be;
+  padding: 40px 14px !important;
+}
+
+.estimate-table-remark {
+  color: #aab0be;
+  font-style: italic;
+}
+
+/* 보관유형 배지 */
+.storage-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.storage-badge--일반 {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.storage-badge--냉장 {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.storage-badge--냉동 {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* ─── 우측 미리보기 패널 ───────────────────────────────────────────────── */
+
+.estimate-preview-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.estimate-preview-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef1f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.estimate-complete-btn {
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 6px;
+  background: #5b4bf3;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.estimate-complete-btn:hover {
+  background: #4a3de0;
+}
+
+.estimate-complete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.estimate-error-text {
+  width: 100%;
+  font-size: 12px;
+  color: #c62828;
+}
+
+.estimate-preview-empty {
+  padding: 40px 18px;
+  text-align: center;
+  color: #aab0be;
+  font-size: 13px;
+}
+
+.estimate-preview-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.estimate-preview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.estimate-preview-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2e3544;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #5b4bf3;
+}
+
+.estimate-preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.estimate-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 12px;
+}
+
+.estimate-preview-row dt {
+  width: 80px;
+  flex-shrink: 0;
+  color: #8a95a8;
+  font-weight: 500;
+}
+
+.estimate-preview-row dd {
+  color: #2e3544;
+  font-weight: 500;
+}
+
+.estimate-preview-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.estimate-preview-items-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6d7789;
+}
+
+.estimate-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.estimate-preview-table th {
+  background: #f3f6fa;
+  color: #8a95a8;
+  font-weight: 500;
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid #e9edf3;
+}
+
+.estimate-preview-table td {
+  padding: 6px 8px;
+  color: #495468;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.estimate-preview-caution {
+  font-size: 12px;
+  color: #6d7789;
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 10px 12px;
+  line-height: 1.6;
+}
+
+/* 상태 배지 */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-badge--작성중 {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.status-badge--진행 {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge--취소 {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ─── 진행/취소 버튼 ──────────────────────────────────────────────────── */
+
+.estimate-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.estimate-action-btn {
+  flex: 1;
+  height: 38px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.estimate-action-btn--proceed {
+  background: #5b4bf3;
+  color: #ffffff;
+}
+
+.estimate-action-btn--proceed:hover:not(:disabled) {
+  background: #4a3de0;
+}
+
+.estimate-action-btn--cancel {
+  background: #ffffff;
+  color: #c62828;
+  border: 1px solid #e5e7eb;
+}
+
+.estimate-action-btn--cancel:hover:not(:disabled) {
+  background: #fff0f0;
+  border-color: #c62828;
+}
+
+.estimate-action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ─── 반응형 ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1200px) {
+  .estimate-layout {
+    grid-template-columns: 260px 1fr 280px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .estimate-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .estimate-preview-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .estimate-layout {
+    grid-template-columns: 1fr;
+  }
+}
