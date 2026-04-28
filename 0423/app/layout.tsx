@@ -6,7 +6,7 @@ import '../styles/style.css';
 import '../styles/estimate.css';
 
 export const metadata: Metadata = {
-  title: '럭키짱레전드충무공마제스티스페셜리스트울트라성모',
+  title: '아니소히님제대로마크해달라구요부부팀장님부팀장님한테밀리지말고',
   description: '스마트 창고 관리 시스템 — 사용자 대시보드',
 };
 
