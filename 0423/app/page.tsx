@@ -5,3 +5,4 @@ export default async function RootPage() {
   const user = await getCurrentAuthUser();
   redirect(user ? '/dashboard' : '/login');
 }
+jihyun
