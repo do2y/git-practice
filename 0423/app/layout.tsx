@@ -7,7 +7,7 @@ import '../styles/estimate.css';
 
 export const metadata: Metadata = {
   title: 'Smart WMS',
-  description: '스마트 창고 관리 시스템 — 사용자 대시보드',
+  description: '제발 conflict',
 };
 
 export default function RootLayout({
